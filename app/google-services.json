@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "687815766324",
+    "firebase_url": "https://androidiot-41f73.firebaseio.com",
+    "project_id": "androidiot-41f73",
+    "storage_bucket": "androidiot-41f73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687815766324:android:a11dd61d846309fc",
+        "android_client_info": {
+          "package_name": "br.com.heiderlopes.androidiotkotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "687815766324-3uqemi1cqoo5f7d3ttb976sssgttp5ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc_xShhHksDAwWQc9btnxEl_9hUCaeNn8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

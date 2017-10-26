@@ -1,0 +1,207 @@
+[
+  {
+    "id": "55420a5a.e29f44",
+    "type": "tab",
+    "label": "Flow 1"
+  },
+  {
+    "id": "a8e4d9bb.d67288",
+    "type": "mqtt in",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "topic": "teste",
+    "qos": "2",
+    "broker": "c21fcf34.92474",
+    "x": 145.5,
+    "y": 175,
+    "wires": [
+      [
+        "df64fcd4.9b683"
+      ]
+    ]
+  },
+  {
+    "id": "df64fcd4.9b683",
+    "type": "json",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "x": 278.5,
+    "y": 230,
+    "wires": [
+      [
+        "ae62a9f1.c89fe8"
+      ]
+    ]
+  },
+  {
+    "id": "ae62a9f1.c89fe8",
+    "type": "function",
+    "z": "55420a5a.e29f44",
+    "name": "Tratamento de Dados",
+    "func": "context.global.arduinoTemperatura = []\ncontext.global.arduinoTemperatura = msg.payload\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 466.5,
+    "y": 266,
+    "wires": [
+      [
+        "5c69c799.b81218",
+        "b160507d.20ecd"
+      ]
+    ]
+  },
+  {
+    "id": "63f086ad.8169e8",
+    "type": "http in",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "url": "/temperatura",
+    "method": "get",
+    "swaggerDoc": "",
+    "x": 168.5,
+    "y": 332,
+    "wires": [
+      [
+        "2b6ab0c6.6f99d"
+      ]
+    ]
+  },
+  {
+    "id": "f1707a3f.034c18",
+    "type": "http response",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "x": 419.5,
+    "y": 423,
+    "wires": [
+
+    ]
+  },
+  {
+    "id": "2b6ab0c6.6f99d",
+    "type": "function",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "func": "dados = {\n    temperatura : context.global.arduinoTemperatura\n}\n\nmsg.payload = JSON.stringify(dados)\n\nmsg.headers = {\n    \"Accept\" : \"application/json\",\n    \"Content-type\" : \"application/json\"\n};\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 249.5,
+    "y": 404,
+    "wires": [
+      [
+        "f1707a3f.034c18"
+      ]
+    ]
+  },
+  {
+    "id": "5c69c799.b81218",
+    "type": "switch",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "gt",
+        "v": "35",
+        "vt": "num"
+      },
+      {
+        "t": "lte",
+        "v": "35",
+        "vt": "num"
+      }
+    ],
+    "checkall": "false",
+    "outputs": 2,
+    "x": 664.5,
+    "y": 266,
+    "wires": [
+      [
+        "e2972cba.dd13d"
+      ],
+      [
+        "c92a6150.ff765"
+      ]
+    ]
+  },
+  {
+    "id": "8067e3e.e75682",
+    "type": "http request",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "method": "POST",
+    "ret": "txt",
+    "url": "http://192.168.2.8:3000/push",
+    "tls": "",
+    "x": 863.5,
+    "y": 164,
+    "wires": [
+      [
+
+      ]
+    ]
+  },
+  {
+    "id": "c92a6150.ff765",
+    "type": "debug",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 785.5,
+    "y": 337,
+    "wires": [
+
+    ]
+  },
+  {
+    "id": "e2972cba.dd13d",
+    "type": "function",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "func": "dados = {\n    temperatura : context.global.arduinoTemperatura\n}\n\nmsg.payload = JSON.stringify(dados)\n\nmsg.headers = {\n    \"Accept\" : \"application/json\",\n    \"Content-type\" : \"application/json\"\n};\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 723.5,
+    "y": 167,
+    "wires": [
+      [
+        "8067e3e.e75682"
+      ]
+    ]
+  },
+  {
+    "id": "b160507d.20ecd",
+    "type": "debug",
+    "z": "55420a5a.e29f44",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 717.5,
+    "y": 409,
+    "wires": [
+
+    ]
+  },
+  {
+    "id": "c21fcf34.92474",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "iot.eclipse.org",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  }
+]
